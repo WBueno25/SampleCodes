@@ -1,0 +1,33 @@
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ /////////////////////////////////////////////////// SHIFT UNIT ////////////////////////////////////////////////////////////////
+ //////////////////////////////////////// Developed By: Willian Analdo Nunes ///////////////////////////////////////////////////
+ //////////////////////////////////////////// PUCRS, Porto Alegre, 2020      ///////////////////////////////////////////////////
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+// BUG FIXED --> Arithmetic Shift was identified as an error in Berkeley Suite because the rtl operand used was ">>" what is logic shift, and arithmetic shift is ">>>"
+
+`include "pkg.sv"
+import my_pkg::*;
+
+module shiftUnit
+    (input logic clk,
+    input logic [31:0]  opA,
+    input logic [31:0]  opB,
+    input               instruction_type i,
+    output logic [31:0] result_out);
+
+    logic [31:0]        result;
+
+    always_comb begin
+        if(i==OP0)                // Shift logic left
+            result <= opA << opB[4:0];
+        else if(i==OP1)
+            result <= opA >> opB[4:0];  // Shift logic right
+        else //SRA e SRAI
+            result <= $signed(opA) >>> opB[4:0]; // Shift arithmetic right
+    end
+
+    always @(posedge clk)
+        result_out <= result;
+
+endmodule
