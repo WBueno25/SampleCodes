@@ -1,1 +1,3 @@
-This project is about solving a problem where you have  a .csv with a list of cities and the distance between them and the user enters a couple of cities and the program have to display the distance between them.
+# Desafio de Logistica
+
+A descrição do problema se encontra no arquivo Enunciado.pdf enquanto a sua resolução se encontra explicada detalhadamente no arquivo Relatorio.pdf.
